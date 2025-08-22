@@ -10,9 +10,11 @@ module.exports = function (req, res, next){
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
+         console.log("DECODED TOKEN:", decoded);
         req.user = decoded; // attach user data 
         next();
     } catch (error) {
+            console.error("JWT ERROR:", error.message);
         res.status(400).json({message:'Invalid token'});
     }
         
