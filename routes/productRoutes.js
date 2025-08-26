@@ -3,6 +3,7 @@
     const auth = require('../middleware/auth');
     const upload = require('../middleware/uploads');
     const { getProducts, getProductById, addProduct, updateProduct, deleteProduct } = require('../controllers/productcontoller');
+    const admin = require('../middleware/admin');
 
 
 
@@ -14,9 +15,9 @@
 
     // protected routes only logged-in user 
 
-    router.post('/',auth, upload.single('image'), addProduct);
-    router.put('/:id',auth, upload.single('image'), updateProduct);
-    router.delete('/:id',auth,deleteProduct);
+    router.post('/',auth,admin, upload.single('image'), addProduct);
+    router.put('/:id',auth,admin, upload.single('image'), updateProduct);
+    router.delete('/:id',auth,admin, deleteProduct);
 
 
-    module.exports = router;
+    module.exports = router;    

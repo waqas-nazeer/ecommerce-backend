@@ -49,9 +49,9 @@ db.orderItems.belongsTo(db.order, { foreignKey: 'orderId' });
 db.product.hasMany(db.orderItems, { foreignKey: 'productId', as: 'orderItems' });
 db.orderItems.belongsTo(db.product, { foreignKey: 'productId', as: 'product' });
 
-db.sequelize.sync({force : true})
+db.sequelize.sync({ alter: true })
 .then(() => {
-    console.log('ALL models were  synchonized sucessfully');
+    console.log('ALL models were  synchonized sucessfully');                
     
 })  
 .catch ( err => { console.log('error synchonized model', err)

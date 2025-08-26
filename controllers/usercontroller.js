@@ -9,7 +9,7 @@ const User = db.user;
 //  Register
 exports.register = async (req, res) => {
       console.log('Register request body:', req.body); // Log request body
-    const { username, email, password } = req.body;
+    const { username, email, password, role } = req.body;
 
     try {
         // Check if email exists
@@ -25,7 +25,8 @@ exports.register = async (req, res) => {
         const newUser = await User.create({
             username,
             email,
-            password: hashedPassword
+            password: hashedPassword,
+            role : role || (email === 'admin@gmail.com' ? 'admin' : 'user')
         });
 
         res.status(201).json({ message: "User registered successfully", user: newUser });
@@ -54,7 +55,7 @@ exports.login = async (req, res) => {
 
         // Create token
         const token = jwt.sign(
-            { id: user.id, email: user.email },
+            { id: user.id, email: user.email, role : user.role },
             process.env.JWT_SECRET,
             { expiresIn: '1y' }
         );

@@ -5,8 +5,7 @@
         // import all functions including clearCart
         const { addToCart, getCart, removeFromCart, clearCart } = require('../controllers/cartcontroller');
 
-        // ✅ Debug log to check imported functions
-// console.log({ addToCart, getCart, removeFromCart, clearCart });
+
 
         // Add to cart
         router.post('/add', auth, addToCart);

@@ -1,3 +1,4 @@
+const { type } = require("express/lib/response");
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define("user", {
@@ -20,6 +21,12 @@ module.exports = (sequelize, DataTypes) => {
     },
     password: {
       type: DataTypes.STRING(255),
+      allowNull: false
+    },
+
+    role : {
+      type: DataTypes.STRING(255),
+      defaultValue: 'user',
       allowNull: false
     },
     created_at: {
