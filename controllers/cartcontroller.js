@@ -27,7 +27,6 @@ exports.addToCart = async (req, res) => {
 };
 
 // Get all items in user's cart
-// Get all items in user's cart
 exports.getCart = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -54,7 +53,7 @@ exports.getCart = async (req, res) => {
   }
 };
 
-
+  
 // ✅ Clear all items in cart
 exports.clearCart = async (req, res) => {
   try {

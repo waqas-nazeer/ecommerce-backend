@@ -26,7 +26,7 @@ exports.register = async (req, res) => {
             username,
             email,
             password: hashedPassword,
-            role : role || (email === 'admin@gmail.com' ? 'admin' : 'user')
+            role : role || 'user'
         });
 
         res.status(201).json({ message: "User registered successfully", user: newUser });
@@ -64,4 +64,6 @@ exports.login = async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
+
+
 };

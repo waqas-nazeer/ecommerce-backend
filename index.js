@@ -22,7 +22,7 @@ db.sequelize.authenticate()
 
 // Routes
 const userRoutes = require('./routes/userRoutes');
-const adminRoutes = require('./routes/adminRoutes')
+const superAdminRoutes = require('./routes/superAdminRoutes')
 const auth = require('./middleware/auth');
 const productRoutes = require('./routes/productRoutes');
 const cartRouter = require('./routes/cartRoutes');
@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
 });
 //APIs
 app.use('/api/users', userRoutes);
-app.use('api/admin', adminRoutes)
+app.use("/api/superadmin", superAdminRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/cart',cartRouter );
 app.use('/api/orders', orderRoutes);
