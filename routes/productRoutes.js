@@ -11,6 +11,7 @@
 
 
     router.get('/', productController.getProducts);
+        router.get('/stats', auth, admin,productController.getProductStats);
     router.get('/:id',productController.getProductById);
 
     // protected routes only logged-in user 
@@ -18,6 +19,7 @@
     router.post('/',auth,admin, upload.single('image'), productController.addProduct);
     router.put('/:id',auth,admin, upload.single('image'), productController.updateProduct);
     router.delete('/:id',auth,admin, productController.deleteProduct);
+ 
 
 
     module.exports = router;    

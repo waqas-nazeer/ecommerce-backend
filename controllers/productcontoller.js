@@ -1,6 +1,8 @@
 
 const db = require('../models');
 const Product = db.product;
+const Cart = db.cart;
+const OrderItem = db.orderItems;
 
 // get all products
 exports.getProducts = async (req, res)=> {
@@ -85,5 +87,36 @@ exports.deleteProduct = async (req, res) => {
     } catch (err) {
            res.status(500).json({ error: err.message });
     }
-
 }
+
+
+// Get product stats for Admin/SuperAdmin
+exports.getProductStats = async (req, res) => {
+  try {
+    const products = await Product.findAll();
+
+    const stats = await Promise.all(products.map(async (product) => {
+      // Total in cart
+      const inCart = await Cart.sum('quantity', { where: { productId: product.id } }) || 0;
+
+      // Total sold
+      const sold = await OrderItem.sum('quantity', { where: { productId: product.id } }) || 0;
+
+      return {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        stock: product.stock,
+        imageUrl: product.imageUrl, 
+        inCart,
+        sold,
+        remaining: product.stock , // remaining stock
+      };
+    }));
+
+    res.json(stats);
+  } catch (err) {
+    console.error("Product stats error:", err);
+    res.status(500).json({ message: err.message });
+  }
+};

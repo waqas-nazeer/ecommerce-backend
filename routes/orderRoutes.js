@@ -12,5 +12,7 @@ router.post('/place', auth, orderController.placeOrder);
 router.get('/', auth, orderController.getOrders);
 
 
+// Get single order (invoice)
+router.get('/:id', auth, orderController.getOrderById);
 
 module.exports = router;
